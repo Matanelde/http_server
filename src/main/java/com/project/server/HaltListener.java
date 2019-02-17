@@ -2,6 +2,7 @@ package com.project.server;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class HaltListener implements Runnable {
 
@@ -18,13 +19,16 @@ public class HaltListener implements Runnable {
             while (sc.hasNextLine()) {
                 String input = sc.nextLine();
                 if ("kill".equals(input)) {
-                    stoppables.stream().peek(s-> {
+                	AtomicInteger atomicInteger = new AtomicInteger(0);
+                    stoppables.stream().forEach(s-> {
                         try {
                             s.stop();
+                            atomicInteger.incrementAndGet();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     });
+                    System.out.println(atomicInteger.get() + " killed");
                     System.exit(0);
                 }
             }

@@ -8,9 +8,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class DosHttpHandler implements HttpHandler {
 
-    public static BlockingQueue<HttpExchange> requests = new ArrayBlockingQueue<HttpExchange>(100000);
-
     public void handle(HttpExchange t) {
-        requests.add(t);
+    	QueueHolder.getInstance().add(t);
     }
 }

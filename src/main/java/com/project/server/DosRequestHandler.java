@@ -17,7 +17,7 @@ public class DosRequestHandler implements Runnable {
 
     public void run() {
         try {
-            System.out.println("Thread is " + Thread.currentThread().getName());
+            //System.out.println("Thread is " + Thread.currentThread().getName());
             String response;
             String query = httpExchange.getRequestURI().getQuery();
             String[] parsedQuery = DosServerUtils.parseQuery(query);

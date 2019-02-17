@@ -36,7 +36,7 @@ public class PollFromQueue implements Runnable, Stoppable {
     public void run() {
         while (true) {
             try {
-                HttpExchange httpExchange = DosHttpHandler.requests.take();
+                HttpExchange httpExchange = QueueHolder.getInstance().take();
                 DosRequestHandler dosRequestHandler = new DosRequestHandler(httpExchange);
                 executor.submit(dosRequestHandler);
             } catch (InterruptedException e) {

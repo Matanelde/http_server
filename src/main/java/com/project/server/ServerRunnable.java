@@ -35,7 +35,7 @@ public class ServerRunnable implements Runnable, Stoppable {
     @Override
     public void run() {
         try {
-            server = HttpServer.create(new InetSocketAddress(8080), 0);
+            server = HttpServer.create(new InetSocketAddress(80), 0);
             server.createContext("/", new DosHttpHandler());
             server.setExecutor(null); // creates a default executor
             server.start();
