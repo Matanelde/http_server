@@ -3,14 +3,15 @@ package com.project.server;
 import org.apache.commons.lang3.math.NumberUtils;
 
 public class DosServerUtils {
-    public static String[] parseQuery(String query) throws Exception {
+    public static String[] parseQuery(String query) {
         String message = null;
         if (query == null || "".equals(query.trim())) {
-            message = "query is empty";
+            return null;
         }
         String[] queryContentArr = query.split("=");
         if (queryContentArr.length < 2) {
-            message = "query not valid " + query;
+            System.err.println("query is not valid " + query);
+            return null;
         }
 
         if (!"clientId".equals(queryContentArr[0])) {
@@ -22,7 +23,8 @@ public class DosServerUtils {
         }
 
         if (message != null) {
-            throw new Exception("query not valid " + query);
+            System.err.println("query is not valid " + query);
+            return null;
         }
         return queryContentArr;
     }

@@ -13,13 +13,15 @@ public class DosRequestHandler implements Runnable {
         clientThresholdChecker = ClientThresholdChecker.getInstance();
     }
 
+
+
     public void run() {
         try {
             System.out.println("Thread is " + Thread.currentThread().getName());
             String response;
             String query = httpExchange.getRequestURI().getQuery();
             String[] parsedQuery = DosServerUtils.parseQuery(query);
-            if (clientThresholdChecker.checkAndUpdateClientThreshold(Integer.valueOf(parsedQuery[1]))) {
+            if (parsedQuery != null && clientThresholdChecker.checkAndUpdateClientThreshold(Integer.valueOf(parsedQuery[1]))) {
                 response = "Ok";
                 httpExchange.sendResponseHeaders(200, response.length());
             } else {
